@@ -1,0 +1,27 @@
+﻿using FluentValidation;
+using Mediat.R.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Mediat.R.Behaviors
+{
+    public class ValidationBehavior<TRequest, TResponse>(IServiceProvider serviceProvider)
+        : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+    {
+        public async Task<TResponse> HandleAsync(TRequest request, Func<Task<TResponse>> next, CancellationToken cancellationToken)
+        {
+            var validator = serviceProvider.GetService<IValidator<TRequest>>();
+            if (validator == null)
+            {
+                return await next();
+            }
+
+            var validationResult = await validator.ValidateAsync(request, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+
+            return await next();
+        }
+    }
+}

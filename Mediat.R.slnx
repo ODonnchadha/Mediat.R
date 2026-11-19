@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Mediat.R.Api/Mediat.R.Api.csproj" Id="bfed341e-8d83-4699-85c2-8dd9786ab587" />
+  <Project Path="Mediat.R.Context/Mediat.R.Context.csproj" Id="4a3acc38-7bad-4a7f-8c5c-c02cfc867c1d" />
+  <Project Path="Mediat.R.Tests/Mediat.R.Tests.csproj" Id="e4dfe7ca-a553-43b9-ba1d-521168fdfed5" />
+  <Project Path="Mediat.R/Mediat.R.csproj" />
+</Solution>
